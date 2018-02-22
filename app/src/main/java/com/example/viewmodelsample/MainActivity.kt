@@ -1,8 +1,11 @@
 package com.example.viewmodelsample
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 
@@ -19,6 +22,11 @@ class MainActivity : AppCompatActivity() {
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
         }
+
+        val user = ViewModelProviders.of(this).get(UserViewModel::class.java)
+        user.getUser()?.observe(this, Observer {
+            Log.d("OLYMPICS", it?.toString())
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
